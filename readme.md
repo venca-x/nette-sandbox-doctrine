@@ -1,4 +1,4 @@
-Nette Sandbox
+Nette Sandbox with Doctrine
 =============
 
 Sandbox is a pre-packaged and pre-configured Nette Framework application
