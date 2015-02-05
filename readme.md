@@ -1,35 +1,49 @@
-Nette Sandbox with Doctrine
+Nette Sandbox + Doctrine
 =============
-
-Sandbox is a pre-packaged and pre-configured Nette Framework application
-that you can use as the skeleton for your new applications.
-
-[Nette](http://nette.org) is a popular tool for PHP web development.
-It is designed to be the most usable and friendliest as possible. It focuses
-on security and performance and is definitely one of the safest PHP frameworks.
 
 
 Installing
 ----------
 
-The best way to install Sandbox is using Composer. If you don't have Composer yet, download
-it following [the instructions](http://doc.nette.org/composer). Then use command:
+		git clone TODO
 
-		composer create-project nette/sandbox my-app
-		cd my-app
+		composer install
 
-Make directories `temp` and `log` writable. Navigate your browser
-to the `www` directory and you will see a welcome page. PHP 5.4 allows
-you run `php -S localhost:8888 -t www` to start the web server and
-then visit `http://localhost:8888` in your browser.
-
-It is CRITICAL that whole `app`, `log` and `temp` directories are NOT accessible
-directly via a web browser! See [security warning](http://nette.org/security-warning).
+		php -S localhost:8888 -t www
 
 
-License
--------
-- Nette: New BSD License or GPL 2.0 or 3.0 (http://nette.org/license)
-- jQuery: MIT License (https://jquery.org/license)
-- Adminer: Apache License 2.0 or GPL 2 (http://www.adminer.org)
-- Sandbox: The Unlicense (http://unlicense.org)
+in Adminer create database `http://localhost:8888/adminer/`
+
+		CREATE DATABASE `doctrine_devel` COLLATE 'utf8_czech_ci';
+		CREATE USER 'doctrine'@'localhost' IDENTIFIED BY 'doctrine_pass';
+		GRANT USAGE ON * . * TO 'doctrine'@'localhost' IDENTIFIED BY 'doctrine_pass' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;
+		GRANT ALL PRIVILEGES ON `doctrine\_%` . * TO 'doctrine'@'localhost';
+		FLUSH PRIVILEGES;
+
+
+create config.local.neon:
+
+		parameters:
+			database:
+				host: localhost
+				dbname: doctrine_devel
+				user: doctrine
+				password: doctrine_pass
+
+Validate schema:
+
+		php ./www/index.php orm:validate-schema
+		
+Crerate database:
+
+		php ./www/index.php orm:schema-tool:create
+
+		
+Add data:
+
+		http://localhost:8888/homepage/add
+		
+Show result:
+
+		http://localhost:8888/
+		

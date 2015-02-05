@@ -34,24 +34,24 @@ class HomepagePresenter extends BasePresenter
 		$daoArticle = $this->EntityManager->getRepository(Article::getClassName());
 		$daoAuthor = $this->EntityManager->getRepository(Author::getClassName());
 
-		//$author = new Author();
-		//$author->name = "Pokusne jmeno";
+		$author = new Author();
+		$author->name = "Božena Němcová";
 
-		$author = $daoAuthor->findOneBy( array("name" => "Pokusne jmeno"));
+		//$author = $daoAuthor->findOneBy( array("name" => "Božena Němcová"));
 
 		$article = new Article();
-		$article->title = "titulke sntagem";
-		$article->text = "text novinky s tagem";
+		$article->title = "Nette with Doctrine is cool";
+		$article->text = "Nette is cool php framework. Doctrine is object relational mapper (ORM) for PHP";
 		$article->author = $author;
 		$author->addArticle($article);
 
 		$tag = new Tag();
-		$tag->name = "kniha";
+		$tag->name = "nette";
 
 		$article->addTag($tag);
 
 		$tag = new Tag();
-		$tag->name = "kniha dvojita";
+		$tag->name = "doctrine";
 
 		$article->addTag($tag);
 
