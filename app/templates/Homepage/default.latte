@@ -1,0 +1,16 @@
+{block content}
+<div id="banner">
+	<h1 n:block=title>Congratulations!</h1>
+</div>
+
+
+{foreach $articles as $article}
+
+    {$article->title}<br>
+    {$article->author->name}<br/>
+    {dump $article->tags}
+    Tags: {if $article->tags}{foreach $article->tags as $tag}{$tag->name}, {/foreach}{/if}<br/>
+<hr/>
+{/foreach}
+
+{/block}
